@@ -1,10 +1,21 @@
 package hello.world;
 
+import jakarta.annotation.PostConstruct;
+
+/*
+ * Use this when using tomcat.
+ */
+
 //@Singleton
 //public class MqttStartup implements ApplicationEventListener<StartupEvent> {
 //    @Override
 //    public void onApplicationEvent(final StartupEvent startupEvent) {
-//        System.out.println("===== MqttStartup ======");
+//        log.info("MqttStartup StartupEvent");
+//    }
+//
+//    @PostConstruct
+//    public void initialize() {
+//        log.info("initialize");
 //    }
 //}
 
