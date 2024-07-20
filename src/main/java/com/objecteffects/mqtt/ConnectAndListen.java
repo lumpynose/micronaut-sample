@@ -24,7 +24,7 @@ public class ConnectAndListen {
     public MqttClient connectAndListen(String broker, String[] topics, int qos)
             throws MqttException {
         this.client = connect(broker);
-        listen(this.client, topics, qos, new ListenerEBruno(this.client));
+        listen(this.client, topics, qos, new Listener(this.client));
 
         return this.client;
     }

@@ -1,17 +1,9 @@
 package com.objecteffects.mqtt;
 
-
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.common.MqttException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-/**
- * @author ebruno
- */
-public class ListenerMain {
-    final static Logger log = LoggerFactory.getLogger(ListenerMain.class);
-
+public class MqttMain {
     public static void main(String[] args) throws MqttException {
         String server = "192.168.50.5";
         String port = "1883";
@@ -21,15 +13,13 @@ public class ListenerMain {
 
         broker = "tcp://" + server + ":" + port;
 
-        ConnectAndListen listener = new ConnectAndListen();
-        MqttClient client = new ConnectAndListen().connect("192.168.50.5");
+        MqttClient client = new Connect().connect(server);
         
         try {
-            listener.connectAndListen(broker, topics, qos);
+            new Listen().listen(client, topics, qos, new Listener(client));
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
