@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: hello.world
+defaultPackage: org.objecteffects.web
 testFramework: junit
 sourceLanguage: java
 buildTool: maven

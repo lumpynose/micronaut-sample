@@ -1,10 +1,16 @@
-package com.objecteffects.mqtt;
+package org.objecteffects.mqtt;
+
+import com.objecteffects.mqtt.Connect;
+import com.objecteffects.mqtt.Listen;
+import com.objecteffects.mqtt.Listener;
 
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.common.MqttException;
+import org.junit.jupiter.api.Test;
 
-public class MqttMain {
-    public static void main(String[] args) throws MqttException {
+class MqttTest {
+    @Test
+    void testItWorks() throws MqttException {
         String serverIp = "192.168.50.5";
         String port = "1883";
         String[] topics = { "rtl_433/temperature/+", "zigbee/temperature/+" };

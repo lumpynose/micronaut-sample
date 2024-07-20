@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>hello.world</groupId>
+    <groupId>org.objecteffects</groupId>
     <artifactId>hello-world</artifactId>
     <version>0.1</version>
     <packaging>${packaging}</packaging>
@@ -21,8 +21,8 @@
         <micronaut.version>4.5.0</micronaut.version>
         <micronaut.runtime>netty</micronaut.runtime>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
-        <micronaut.aot.packageName>hello.world.aot.generated</micronaut.aot.packageName>
-        <exec.mainClass>hello.world.Application</exec.mainClass>
+        <micronaut.aot.packageName>org.objecteffects.web.aot.generated</micronaut.aot.packageName>
+        <exec.mainClass>org.objecteffects.web.Application</exec.mainClass>
     </properties>
 
     <repositories>
@@ -57,7 +57,7 @@
         </dependency>
 
         <!-- for war file -->
-<!--
+        <!--
         <dependency>
             <groupId>io.micronaut.servlet</groupId>
             <artifactId>micronaut-http-server-jetty</artifactId>
@@ -67,13 +67,25 @@
 -->
 
         <!-- for war file -->
-<!--
+        <!--
         <dependency>
             <groupId>io.micronaut.servlet</groupId>
             <artifactId>micronaut-servlet-engine</artifactId>
             <version>4.9.2</version>
         </dependency>
 -->
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.15.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.eclipse.paho</groupId>
@@ -114,12 +126,12 @@
                     <configFile>aot-${packaging}.properties</configFile>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -147,7 +159,7 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=hello.world</arg>
+                        <arg>-Amicronaut.processing.group=org.objecteffects.web</arg>
                         <arg>-Amicronaut.processing.module=hello-world</arg>
                     </compilerArgs>
                 </configuration>

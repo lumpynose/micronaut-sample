@@ -12,32 +12,28 @@ import org.slf4j.LoggerFactory;
 
 public class Listen {
     final static Logger log = LoggerFactory.getLogger(Listen.class);
-    
-    public void listen(MqttClient client, String[] topics, int qos,
-        IMqttMessageListener listener) {
 
-    List<MqttSubscription> subs = new ArrayList<>();
+    public void listen(final MqttClient client, final String[] topics,
+        final int qos,
+        final IMqttMessageListener listener) {
 
-    for (String topic : topics) {
-        log.info("Subscribing to topic " + topic);
+        final List<MqttSubscription> subs = new ArrayList<>();
 
-        subs.add(new MqttSubscription(topic, qos));
+        for (String topic : topics) {
+            log.info("Subscribing to topic {}", topic);
+
+            subs.add(new MqttSubscription(topic, qos));
+        }
+
+        final IMqttMessageListener[] listeners = new Listener[subs.size()];
+        Arrays.fill(listeners, listener);
+
+        try {
+            client.subscribe(subs.toArray(new MqttSubscription[0]), listeners);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-    IMqttMessageListener[] listeners = new Listener[subs.size()];
-    Arrays.fill(listeners, listener);
-
-    try {
-        client.subscribe(subs.toArray(new MqttSubscription[0]), listeners);
-
-//        for (String topic : topics) {
-//            log.info("Subscribing to topic " + topic);
-//            client.subscribe(topic, qos, listener);
-//        }
-    }
-    catch (Exception e) {
-        e.printStackTrace();
-    }
-}
 
 }

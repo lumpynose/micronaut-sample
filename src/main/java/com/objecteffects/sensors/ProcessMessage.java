@@ -2,10 +2,9 @@ package com.objecteffects.sensors;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
-
 import com.google.gson.Gson;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +13,8 @@ public class ProcessMessage {
             .getLogger(ProcessMessage.class);
 
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-    private static Map<String, String> propSensors = MainPaho.getPropSensors();
-    private static TUnit tunit = MainPaho.getTunit();
+    // private static Map<String, String> propSensors = MainPaho.getPropSensors();
+    private static TUnit tunit = TUnit.Fahrenheit; // MainPaho.getTunit();
 
     public ProcessMessage() {
     }
@@ -29,11 +28,12 @@ public class ProcessMessage {
 
         final SensorData target = gson.fromJson(data, SensorData.class);
 
-        if (!propSensors.containsKey(topic_trimmed)) {
-            return null;
-        }
+//        if (!propSensors.containsKey(topic_trimmed)) {
+//            return null;
+//        }
 
-        target.setSensorName(propSensors.get(topic_trimmed));
+        //target.setSensorName(propSensors.get(topic_trimmed));
+        target.setSensorName(topic_trimmed);
 
         target.setTemperatureShow((float) tunit.convert(target));
         target.setTemperatureLetter(tunit.toString());

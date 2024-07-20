@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Connect {
-    final static Logger log = LoggerFactory.getLogger(ConnectAndListen.class);
+    final static Logger log = LoggerFactory.getLogger(Connect.class);
 
     private static MemoryPersistence persistence = new MemoryPersistence();
 
@@ -19,7 +19,7 @@ public class Connect {
         String clientId = UUID.randomUUID().toString();
 
         try {
-            log.info("Connecting to MQTT broker: " + broker);
+            log.info("Connecting to MQTT broker: {}", broker);
 
             MqttConnectionOptions connOpts = new MqttConnectionOptions();
             connOpts.setCleanStart(false);
@@ -30,11 +30,11 @@ public class Connect {
             log.info("Connected");
         }
         catch (MqttException me) {
-            log.info("reason " + me.getReasonCode());
-            log.info("msg " + me.getMessage());
-            log.info("loc " + me.getLocalizedMessage());
-            log.info("cause " + me.getCause());
-            log.info("excep " + me);
+            log.info("reason {}", me.getReasonCode());
+            log.info("msg {}", me.getMessage());
+            log.info("loc {}", me.getLocalizedMessage());
+            log.info("cause {}", me.getCause());
+            log.info("excep {}", me);
             me.printStackTrace();
 
             throw me;

@@ -1,4 +1,4 @@
-package hello.world;
+package org.objecteffects.web;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
