@@ -1,4 +1,4 @@
-package hello.world;
+package com.objecteffects.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package hello.world;
+package com.objecteffects.web;
 
 import io.micronaut.core.annotation.Introspected;
 

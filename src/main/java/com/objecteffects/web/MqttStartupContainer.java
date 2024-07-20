@@ -1,6 +1,4 @@
-package hello.world;
-
-import jakarta.annotation.PostConstruct;
+package com.objecteffects.web;
 
 /*
  * Use this when using tomcat.
