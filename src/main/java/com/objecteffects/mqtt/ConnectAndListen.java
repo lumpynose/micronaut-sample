@@ -69,7 +69,7 @@ public class ConnectAndListen {
             subs.add(new MqttSubscription(topic, qos));
         }
 
-        IMqttMessageListener[] listeners = new ListenerEBruno[subs.size()];
+        IMqttMessageListener[] listeners = new Listener[subs.size()];
         Arrays.fill(listeners, listener);
 
         try {

@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author ebruno
  */
 public class ListenerMain {
     final static Logger log = LoggerFactory.getLogger(ListenerMain.class);

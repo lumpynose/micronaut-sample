@@ -1,4 +1,4 @@
-package com.objecteffects.mqtt;
+package com.objecteffects.mqttebruno;
 
 import com.objecteffects.web.MqttStartupCli;
 
