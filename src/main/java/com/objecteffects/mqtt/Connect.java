@@ -9,6 +9,9 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class Connect {
     final static Logger log = LoggerFactory.getLogger(Connect.class);
 
@@ -30,12 +33,12 @@ public class Connect {
             log.info("Connected");
         }
         catch (MqttException me) {
-            log.info("reason {}", me.getReasonCode());
-            log.info("msg {}", me.getMessage());
-            log.info("loc {}", me.getLocalizedMessage());
-            log.info("cause {}", me.getCause());
-            log.info("excep {}", me);
-            me.printStackTrace();
+            log.error("reason {}", me.getReasonCode());
+            log.error("msg {}", me.getMessage());
+            log.error("loc {}", me.getLocalizedMessage());
+            log.error("cause {}", me.getCause());
+            
+            log.error("exception: {}", me);
 
             throw me;
         }

@@ -8,6 +8,9 @@ import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.common.MqttException;
 import org.junit.jupiter.api.Test;
 
+/*
+ * Wrong.
+ */
 class MqttTest {
     @Test
     void testItWorks() throws MqttException {
@@ -22,7 +25,7 @@ class MqttTest {
         MqttClient client = new Connect().connect(broker);
         
         try {
-            new Listen().listen(client, topics, qos, new Listener(client));
+            new Listen().listen(client, topics, qos, new Listener());
         }
         catch (Exception e) {
             e.printStackTrace();

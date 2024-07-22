@@ -10,6 +10,9 @@ import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class Listen {
     final static Logger log = LoggerFactory.getLogger(Listen.class);
 
@@ -35,5 +38,4 @@ public class Listen {
             e.printStackTrace();
         }
     }
-
 }

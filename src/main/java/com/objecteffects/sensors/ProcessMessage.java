@@ -8,23 +8,34 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.micronaut.context.annotation.Prototype;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+
+@Prototype
 public class ProcessMessage {
     private final static Logger log = LoggerFactory
-            .getLogger(ProcessMessage.class);
+        .getLogger(ProcessMessage.class);
 
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-    // private static Map<String, String> propSensors = MainPaho.getPropSensors();
     private static TUnit tunit = TUnit.Fahrenheit; // MainPaho.getTunit();
+    
+    @Inject
+    Sensors sensors;
+    
+    // private static Map<String, String> propSensors =
+    // MainPaho.getPropSensors();
 
     public ProcessMessage() {
+        log.info("constructor");
     }
 
     public SensorData processData(final String topic, final String data) {
-        final Gson gson = new Gson();
-
         final String topic_trimmed = StringUtils.substringAfterLast(topic, "/");
 
-        log.debug("topic: {}", topic_trimmed);
+        log.info("topic: {}", topic_trimmed);
+
+        final Gson gson = new Gson();
 
         final SensorData target = gson.fromJson(data, SensorData.class);
 
@@ -32,9 +43,9 @@ public class ProcessMessage {
 //            return null;
 //        }
 
-        //target.setSensorName(propSensors.get(topic_trimmed));
-        target.setSensorName(topic_trimmed);
+        // target.setSensorName(propSensors.get(topic_trimmed));
 
+        target.setSensorName(topic_trimmed);
         target.setTemperatureShow((float) tunit.convert(target));
         target.setTemperatureLetter(tunit.toString());
 
@@ -42,8 +53,15 @@ public class ProcessMessage {
 
         target.setTimestamp(dtf.format(dateTime));
 
-        log.debug("decoded data: {}", target.toString());
+        log.info("decoded data: {}", target.toString());
 
+        sensors.addSensor(target);
+        
         return target;
+    }
+
+    @PostConstruct
+    public void initialize() {
+        log.info("initialize");
     }
 }

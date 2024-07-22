@@ -1,6 +1,5 @@
 package com.objecteffects.mqtt;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +16,16 @@ import org.slf4j.LoggerFactory;
 
 public class ConnectAndListen {
     final static Logger log = LoggerFactory.getLogger(ConnectAndListen.class);
-    
+
     private static MemoryPersistence persistence = new MemoryPersistence();
     private MqttClient client;
 
     public MqttClient connectAndListen(String broker, String[] topics, int qos)
-            throws MqttException {
+        throws MqttException {
         this.client = connect(broker);
-        listen(this.client, topics, qos, new Listener(this.client));
+        Listener listener = new Listener();
+        listener.setClient(client);
+        listen(this.client, topics, qos, listener);
 
         return this.client;
     }
@@ -59,7 +60,7 @@ public class ConnectAndListen {
     }
 
     public void listen(MqttClient client, String[] topics, int qos,
-            IMqttMessageListener listener) {
+        IMqttMessageListener listener) {
 
         List<MqttSubscription> subs = new ArrayList<>();
 
@@ -86,6 +87,7 @@ public class ConnectAndListen {
     }
 
     public void disconnect() {
+
         try {
             this.client.disconnect();
             log.info("Disconnected");

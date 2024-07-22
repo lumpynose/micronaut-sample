@@ -1,5 +1,10 @@
 package com.objecteffects.web;
 
+import java.util.Collection;
+
+import com.objecteffects.sensors.SensorData;
+import com.objecteffects.sensors.Sensors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,10 +13,14 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
+import jakarta.inject.Inject;
 
 @Controller("/views")
 class ViewsController {
     final static Logger log = LoggerFactory.getLogger(ViewsController.class);
+    
+    @Inject
+    Sensors sensors;
 
     @View("home")
     @Get("/map")
@@ -37,5 +46,13 @@ class ViewsController {
         log.info("index get pojo2");
 
         return new Person("sdelamo-pojo2", true);
+    }
+
+    @View("mqtt")
+    @Get("/sensors")
+    public Collection<SensorData> sensors() {
+        log.info("index get sensors");
+
+        return sensors.getSensors();
     }
 }
