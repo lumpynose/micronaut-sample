@@ -10,15 +10,15 @@ public class SensorData implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String sensorName = "";
-    private float temperature_F = Float.NaN;
-    private float temperature = Float.NaN;
-    private float temperatureShow;
+    private Float temperature_F; // = Float.NaN;
+    private Float temperature; // = Float.NaN;
+    private Float temperatureShow;
     private String temperatureLetter;
-    private float humidity = Float.NaN;
+    private Float  humidity; // = Float.NaN;
     private int battery_ok = 0;
     private String timestamp;
     private int illuminance_lux = Integer.MIN_VALUE;
-    private float pressure = Float.NaN;
+    private Float pressure; // = Float.NaN;
     private int voc = Integer.MIN_VALUE;
 
     public int getVoc() {
@@ -29,11 +29,11 @@ public class SensorData implements Serializable {
         this.voc = _voc;
     }
 
-    public float getPressure() {
+    public Float getPressure() {
         return this.pressure;
     }
 
-    public void setPressure(final float _pressure1) {
+    public void setPressure(final Float _pressure1) {
         this.pressure = _pressure1;
     }
 
@@ -61,27 +61,27 @@ public class SensorData implements Serializable {
         this.sensorName = _sensorName;
     }
 
-    public float getTemperature_F() {
+    public Float getTemperature_F() {
         return this.temperature_F;
     }
 
-    public void setTemperature_F(final float _temperature_F) {
+    public void setTemperature_F(final Float _temperature_F) {
         this.temperature_F = _temperature_F;
     }
 
-    public float getTemperature() {
+    public Float getTemperature() {
         return this.temperature;
     }
 
-    public void setTemperature(final float _temperature) {
+    public void setTemperature(final Float _temperature) {
         this.temperature = _temperature;
     }
 
-    public float getTemperatureShow() {
+    public Float getTemperatureShow() {
         return this.temperatureShow;
     }
 
-    public void setTemperatureShow(final float _temperatureShow) {
+    public void setTemperatureShow(final Float _temperatureShow) {
         this.temperatureShow = _temperatureShow;
     }
 
@@ -93,11 +93,11 @@ public class SensorData implements Serializable {
         this.temperatureLetter = _temperatureLetter;
     }
 
-    public float getHumidity() {
+    public Float getHumidity() {
         return this.humidity;
     }
 
-    public void setHumidity(final float _humidity) {
+    public void setHumidity(final Float _humidity) {
         this.humidity = _humidity;
     }
 

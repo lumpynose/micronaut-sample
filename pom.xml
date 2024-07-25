@@ -56,6 +56,11 @@
             <artifactId>micronaut-views-thymeleaf</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-jackson-databind</artifactId>
+        </dependency>
+
         <!-- for war file -->
         <!--
         <dependency>

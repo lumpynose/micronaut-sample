@@ -8,23 +8,34 @@
 </head>
 <body>
     <section>
-        <p th:text="${sensors.size}"></p>
         <table>
-            <tr th:each="iter : ${sensors}">
-                <td class="sensor" th:text="${iter.key}">key</td>
-                <!-- ${#numbers.formatDecimal(num,3,2)} -->
-                <td class="value"
-                    th:text="|${#numbers.formatDecimal(iter.value.temperatureShow,1,1)} ${iter.value.temperatureLetter}|">
-                    temperature</td>
-                <!--
-                -->
-                <td th:text="${iter.value}">value</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th class="sensor">Sensor</th>
+                    <th class="temperature">Temperature</th>
+                    <th class="humidity">Humidity</th>
+                    <th class="pressure">Pressure</th>
+                </tr>
+            <thead>
+            <tbody>
+                <tr th:each="iter : ${sensors}">
+                    <td class="sensor" th:text="${iter.key}">key</td>
+                    <!-- ${#numbers.formatDecimal(num,3,2)} -->
+                    <td class="temperature"
+                        th:text="|${#numbers.formatDecimal(iter.value.temperatureShow,1,1)} ${iter.value.temperatureLetter}|">
+                        temperature</td>
+                    <td class="humidity"
+                        th:text="${iter.value.humidity} ? ${iter.value.humidity} : '---'">
+                        humidity</td>
+                    <td class="pressure"
+                        th:text="${iter.value.pressure} ? ${iter.value.pressure} : '---'">
+                        humidity</td>
+                </tr>
+            </tbody>
         </table>
     </section>
 
-    <footer th:insert="~{footer :: copy}">
-    </footer>
+    <footer class="footer" th:insert="~{footer :: copy}"> </footer>
 
 </body>
 </html>
