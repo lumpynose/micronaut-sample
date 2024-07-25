@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>sensors 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="refresh" content="60">
+<link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+<body>
+    <section>
+        <p th:text="${sensors.size}"></p>
+        <div class="gridcontainer" th:each="iter : ${sensors}">
+            <div class="griditem1" th:text="${iter.key}">key</div>
+            <div class="griditem2"
+                th:text="|${#numbers.formatDecimal(iter.value.temperatureShow,1,1)} ${iter.value.temperatureLetter}|">
+                temperature</div>
+        </div>
+    </section>
+
+    <footer th:insert="~{footer :: copy}"> </footer>
+
+</body>
+</html>

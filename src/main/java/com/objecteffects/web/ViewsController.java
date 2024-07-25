@@ -1,8 +1,5 @@
 package com.objecteffects.web;
 
-import java.util.Collection;
-
-import com.objecteffects.sensors.SensorData;
 import com.objecteffects.sensors.Sensors;
 
 import org.slf4j.Logger;
@@ -15,7 +12,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.views.View;
 import jakarta.inject.Inject;
 
-@Controller("/views")
+@Controller
 class ViewsController {
     final static Logger log = LoggerFactory.getLogger(ViewsController.class);
     
@@ -50,9 +47,17 @@ class ViewsController {
 
     @View("mqtt")
     @Get("/sensors")
-    public Collection<SensorData> sensors() {
+    public Sensors sensors() {
         log.info("index get sensors");
 
-        return sensors.getSensors();
+        return sensors;
+    }
+
+    @View("mqtt-grid")
+    @Get("/sensors2")
+    public Sensors sensors2() {
+        log.info("index get sensors2");
+
+        return sensors;
     }
 }

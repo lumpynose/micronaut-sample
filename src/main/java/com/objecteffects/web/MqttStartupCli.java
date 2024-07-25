@@ -20,7 +20,7 @@ public class MqttStartupCli
     implements ApplicationEventListener<ServerStartupEvent> {
     final static Logger log = LoggerFactory.getLogger(MqttStartupCli.class);
 
-    final String broker = "tcp://192.168.50.5:1883";
+    final String broker = "tcp://192.168.50.3:1883";
     final String[] topics = { "rtl_433/temperature/+", "zigbee/temperature/+" };
     final int qos = 1;
 

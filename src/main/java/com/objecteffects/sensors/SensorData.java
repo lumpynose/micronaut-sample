@@ -1,8 +1,14 @@
 package com.objecteffects.sensors;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SensorData {
+import io.micronaut.core.annotation.Introspected;
+
+@Introspected 
+public class SensorData implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private String sensorName = "";
     private float temperature_F = Float.NaN;
     private float temperature = Float.NaN;
