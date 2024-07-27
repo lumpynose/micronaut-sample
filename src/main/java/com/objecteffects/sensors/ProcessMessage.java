@@ -3,7 +3,6 @@ package com.objecteffects.sensors;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -41,10 +40,6 @@ public class ProcessMessage {
 
         log.info("topic: {}", topic_trimmed);
 
-        // final Gson gson = new Gson();
-
-        // final SensorData target = gson.fromJson(data, SensorData.class);
-
         final SensorData target =
             this.mapper.readValue(data.getBytes(), SensorData.class);
 
@@ -53,7 +48,6 @@ public class ProcessMessage {
 //        }
 
         // target.setSensorName(propSensors.get(topic_trimmed));
-
         target.setSensorName(topic_trimmed);
         target.setTemperatureShow((float) tunit.convert(target));
         target.setTemperatureLetter(tunit.toString());
