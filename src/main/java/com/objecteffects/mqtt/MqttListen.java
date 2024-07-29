@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class Listen {
-    final static Logger log = LoggerFactory.getLogger(Listen.class);
+public class MqttListen {
+    final static Logger log = LoggerFactory.getLogger(MqttListen.class);
 
     public void listen(final MqttClient client, final String[] topics,
         final int qos,
@@ -28,7 +28,7 @@ public class Listen {
             subs.add(new MqttSubscription(topic, qos));
         }
 
-        final IMqttMessageListener[] listeners = new Listener[subs.size()];
+        final IMqttMessageListener[] listeners = new MqttListener[subs.size()];
         Arrays.fill(listeners, listener);
 
         try {

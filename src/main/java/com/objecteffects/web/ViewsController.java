@@ -52,12 +52,4 @@ class ViewsController {
 
         return sensors;
     }
-
-    @View("mqtt-grid")
-    @Get("/sensors2")
-    public Sensors sensors2() {
-        log.info("index get sensors2");
-
-        return sensors;
-    }
 }

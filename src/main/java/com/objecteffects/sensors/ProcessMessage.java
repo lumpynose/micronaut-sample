@@ -22,9 +22,6 @@ public class ProcessMessage {
     private static TUnit tunit = TUnit.Fahrenheit; // MainPaho.getTunit();
 
     @Inject
-    Sensors sensors;
-
-    @Inject
     JacksonDatabindMapper mapper;
 
     // private static Map<String, String> propSensors =
@@ -57,8 +54,6 @@ public class ProcessMessage {
         target.setTimestamp(this.dtf.format(dateTime));
 
         log.info("decoded data: {}", target.toString());
-
-        this.sensors.addSensor(target);
 
         return target;
     }

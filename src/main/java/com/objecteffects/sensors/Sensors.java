@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.micronaut.core.annotation.Introspected;
-import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
 
 @Singleton
@@ -28,8 +27,4 @@ public class Sensors {
 
         return sensorsMap;
     }
-
-//    public @NonNull Map<String, SensorData> get() {
-//        return sensorsMap;
-//    }
 }

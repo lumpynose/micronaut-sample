@@ -23,7 +23,7 @@ public class ConnectAndListen {
     public MqttClient connectAndListen(String broker, String[] topics, int qos)
         throws MqttException {
         this.client = connect(broker);
-        Listener listener = new Listener();
+        MqttListener listener = new MqttListener();
         listener.setClient(client);
         listen(this.client, topics, qos, listener);
 
@@ -70,7 +70,7 @@ public class ConnectAndListen {
             subs.add(new MqttSubscription(topic, qos));
         }
 
-        IMqttMessageListener[] listeners = new Listener[subs.size()];
+        IMqttMessageListener[] listeners = new MqttListener[subs.size()];
         Arrays.fill(listeners, listener);
 
         try {

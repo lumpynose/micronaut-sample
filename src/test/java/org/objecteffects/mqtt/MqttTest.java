@@ -1,8 +1,8 @@
 package org.objecteffects.mqtt;
 
-import com.objecteffects.mqtt.Connect;
-import com.objecteffects.mqtt.Listen;
-import com.objecteffects.mqtt.Listener;
+import com.objecteffects.mqtt.MqttConnect;
+import com.objecteffects.mqtt.MqttListen;
+import com.objecteffects.mqtt.MqttListener;
 
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.common.MqttException;
@@ -22,10 +22,10 @@ class MqttTest {
 
         broker = "tcp://" + serverIp + ":" + port;
 
-        MqttClient client = new Connect().connect(broker);
+        MqttClient client = new MqttConnect().connect(broker);
         
         try {
-            new Listen().listen(client, topics, qos, new Listener());
+            new MqttListen().listen(client, topics, qos, new MqttListener());
         }
         catch (Exception e) {
             e.printStackTrace();

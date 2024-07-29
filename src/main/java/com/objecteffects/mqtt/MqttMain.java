@@ -15,10 +15,10 @@ public class MqttMain {
 
         String broker = "tcp://" + serverIp + ":" + port;
 
-        MqttClient client = new Connect().connect(broker);
+        MqttClient client = new MqttConnect().connect(broker);
         
         try {
-            new Listen().listen(client, topics, qos, new Listener());
+            new MqttListen().listen(client, topics, qos, new MqttListener());
         }
         catch (Exception e) {
             e.printStackTrace();

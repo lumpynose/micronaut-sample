@@ -2,6 +2,7 @@ package com.objecteffects.mqtt;
 
 import com.objecteffects.sensors.ProcessMessage;
 import com.objecteffects.sensors.SensorData;
+import com.objecteffects.sensors.Sensors;
 
 import org.eclipse.paho.mqttv5.client.IMqttMessageListener;
 import org.eclipse.paho.mqttv5.client.MqttClient;
@@ -14,15 +15,18 @@ import io.micronaut.context.annotation.Prototype;
 import jakarta.inject.Inject;
 
 @Prototype
-public class Listener implements IMqttMessageListener {
-    final static Logger log = LoggerFactory.getLogger(Listener.class);
+public class MqttListener implements IMqttMessageListener {
+    final static Logger log = LoggerFactory.getLogger(MqttListener.class);
 
     private MqttClient client;
 
     @Inject
     ProcessMessage processMessage;
 
-    public Listener() {
+    @Inject
+    Sensors sensors;
+
+    public MqttListener() {
         log.info("constructor");
     }
 
@@ -32,12 +36,12 @@ public class Listener implements IMqttMessageListener {
         throws Exception {
         final String messageTxt = new String(mqttMessage.getPayload());
         log.info("Message on {}: '{}'", topic, messageTxt);
-
-        log.info("processMessage: {}", this.processMessage);
         
         final SensorData target =
             this.processMessage.processData(topic, messageTxt);
         log.info("target: {}", target);
+
+        this.sensors.addSensor(target);
 
         final MqttProperties props = mqttMessage.getProperties();
         final String responseTopic = props.getResponseTopic();

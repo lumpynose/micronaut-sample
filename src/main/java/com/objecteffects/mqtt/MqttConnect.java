@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class Connect {
-    final static Logger log = LoggerFactory.getLogger(Connect.class);
+public class MqttConnect {
+    final static Logger log = LoggerFactory.getLogger(MqttConnect.class);
 
     private static MemoryPersistence persistence = new MemoryPersistence();
 

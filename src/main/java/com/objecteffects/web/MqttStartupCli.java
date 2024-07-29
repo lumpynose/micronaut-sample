@@ -5,16 +5,18 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 import jakarta.inject.Inject;
 
-import com.objecteffects.mqtt.Connect;
-import com.objecteffects.mqtt.Listen;
-import com.objecteffects.mqtt.Listener;
+import com.objecteffects.mqtt.MqttConnect;
+import com.objecteffects.mqtt.MqttListen;
+import com.objecteffects.mqtt.MqttListener;
 
+@Requires(property = "mqttConnect.url")
 @Singleton
 public class MqttStartupCli
     implements ApplicationEventListener<ServerStartupEvent> {
@@ -25,13 +27,13 @@ public class MqttStartupCli
     final int qos = 1;
 
     @Inject
-    Connect connect;
+    MqttConnect connect;
 
     @Inject
-    Listen listen;
+    MqttListen listen;
 
     @Inject
-    Listener listener;
+    MqttListener listener;
 
     @Override
     public void onApplicationEvent(final ServerStartupEvent startupEvent) {
