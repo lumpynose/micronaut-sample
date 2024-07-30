@@ -9,14 +9,15 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.inject.Singleton;
+import io.micronaut.context.annotation.Prototype;
 
-@Singleton
+@Prototype
 public class MqttConnect {
     final static Logger log = LoggerFactory.getLogger(MqttConnect.class);
 
     private static MemoryPersistence persistence = new MemoryPersistence();
 
+    @SuppressWarnings("static-method")
     public MqttClient connect(String broker) throws MqttException {
         MqttClient client;
         String clientId = UUID.randomUUID().toString();
@@ -32,27 +33,23 @@ public class MqttConnect {
 
             log.info("Connected");
         }
-        catch (MqttException me) {
-            log.error("reason {}", me.getReasonCode());
-            log.error("msg {}", me.getMessage());
-            log.error("loc {}", me.getLocalizedMessage());
-            log.error("cause {}", me.getCause());
-            
-            log.error("exception: {}", me);
+        catch (MqttException ex) {
+            log.error("exception: {}", ex);
 
-            throw me;
+            throw ex;
         }
 
         return client;
     }
 
+    @SuppressWarnings("static-method")
     public void disconnect(MqttClient client) {
         try {
             client.disconnect();
             log.info("Disconnected");
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception ex) {
+            log.error("exception: {}", ex);
         }
     }
 }

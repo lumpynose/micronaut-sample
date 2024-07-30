@@ -1,10 +1,23 @@
 package com.objecteffects.web;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import javax.sql.DataSource;
+
 import com.objecteffects.sensors.Sensors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.jooq.DSLContext;
+import org.jooq.Param;
+import org.jooq.SQLDialect;
+import org.jooq.Query;
+import org.jooq.impl.DSL;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
@@ -15,9 +28,12 @@ import jakarta.inject.Inject;
 @Controller
 class ViewsController {
     final static Logger log = LoggerFactory.getLogger(ViewsController.class);
-    
+
     @Inject
     Sensors sensors;
+
+    @Inject
+    DataSource ds;
 
     @View("home")
     @Get("/map")
@@ -50,6 +66,6 @@ class ViewsController {
     public Sensors sensors() {
         log.info("index get sensors");
 
-        return sensors;
+        return this.sensors;
     }
 }

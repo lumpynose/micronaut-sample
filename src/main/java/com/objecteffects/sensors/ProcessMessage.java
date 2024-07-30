@@ -46,7 +46,7 @@ public class ProcessMessage {
 
         // target.setSensorName(propSensors.get(topic_trimmed));
         target.setSensorName(topic_trimmed);
-        target.setTemperatureShow((float) tunit.convert(target));
+        target.setTemperatureShow(tunit.convert(target));
         target.setTemperatureLetter(tunit.toString());
 
         final LocalDateTime dateTime = LocalDateTime.now();

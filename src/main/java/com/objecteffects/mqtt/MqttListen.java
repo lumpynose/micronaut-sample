@@ -10,12 +10,13 @@ import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.inject.Singleton;
+import io.micronaut.context.annotation.Prototype;
 
-@Singleton
+@Prototype
 public class MqttListen {
     final static Logger log = LoggerFactory.getLogger(MqttListen.class);
 
+    @SuppressWarnings("static-method")
     public void listen(final MqttClient client, final String[] topics,
         final int qos,
         final IMqttMessageListener listener) {
@@ -34,8 +35,8 @@ public class MqttListen {
         try {
             client.subscribe(subs.toArray(new MqttSubscription[0]), listeners);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception ex) {
+            log.error("exception: {}", ex);
         }
     }
 }

@@ -27,10 +27,6 @@
         <profile>
             <id>jar</id>
 
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
             <properties>
                 <packaging>jar</packaging>
                 <micronaut.runtime>netty</micronaut.runtime>
@@ -48,6 +44,10 @@
         <profile>
             <id>war</id>
 
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
             <properties>
                 <packaging>war</packaging>
             </properties>
@@ -56,14 +56,14 @@
                 <dependency>
                     <groupId>io.micronaut.servlet</groupId>
                     <artifactId>micronaut-http-server-tomcat</artifactId>
-                    <version>4.9.2</version>
+                    <version>4.9.2</version><!--$NO-MVN-MAN-VER$-->
                     <scope>provided</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>io.micronaut.servlet</groupId>
                     <artifactId>micronaut-servlet-engine</artifactId>
-                    <version>4.9.2</version>
+                    <version>4.9.2</version><!--$NO-MVN-MAN-VER$-->
                 </dependency>
             </dependencies>
         </profile>
@@ -84,12 +84,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-http-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>io.micronaut.views</groupId>
             <artifactId>micronaut-views-thymeleaf</artifactId>
         </dependency>
@@ -103,6 +97,11 @@
             <groupId>io.micronaut.sql</groupId>
             <artifactId>micronaut-jdbc-tomcat</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut.sql</groupId>
+            <artifactId>micronaut-jooq</artifactId>
         </dependency>
 
         <dependency>
@@ -123,15 +122,21 @@
         </dependency>
 
         <dependency>
-            <groupId>io.micronaut.test</groupId>
-            <artifactId>micronaut-test-junit5</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-client</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>runtime</scope>
+            <groupId>io.micronaut.test</groupId>
+            <artifactId>micronaut-test-junit5</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -143,6 +148,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>4.2.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

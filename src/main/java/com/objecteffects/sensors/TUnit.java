@@ -12,55 +12,55 @@ import java.util.Map;
 public enum TUnit {
     Celsius("C") {
         @Override
-        public double convert(final SensorData sensor) {
+        public float convert(final SensorData sensor) {
             if (Float.isFinite(sensor.getTemperature())) {
                 return sensor.getTemperature();
             }
 
             if (Float.isFinite(sensor.getTemperature_F())) {
-                final double celsius = (sensor.getTemperature_F() - 32.0)
-                        * (5.0 / 9.0);
+                final float celsius = (float) ((sensor.getTemperature_F() - 32.0)
+                        * (5.0 / 9.0));
 
                 return celsius;
             }
 
-            return Double.NaN;
+            return Float.NaN;
         }
     },
     Fahrenheit("F") {
         @Override
-        public double convert(final SensorData sensor) {
+        public float convert(final SensorData sensor) {
             if (Float.isFinite(sensor.getTemperature_F())) {
                 return sensor.getTemperature_F();
             }
 
             if (Float.isFinite(sensor.getTemperature())) {
-                final double fahr = sensor.getTemperature() * (9.0 / 5.0)
-                        + 32.0;
+                final float fahr = (float) (sensor.getTemperature() * (9.0 / 5.0)
+                        + 32.0);
 
                 return fahr;
             }
 
-            return Double.NaN;
+            return Float.NaN;
         }
     },
     Kelvin("K") {
         @Override
-        public double convert(final SensorData sensor) {
+        public float convert(final SensorData sensor) {
             if (Float.isFinite(sensor.getTemperature_F())) {
-                final double kelvin = (sensor.getTemperature_F() - 32)
-                        * (5.0 / 9.0) + 273.15;
+                final float kelvin = (float) ((sensor.getTemperature_F() - 32)
+                        * (5.0 / 9.0) + 273.15);
 
                 return kelvin;
             }
 
             if (Float.isFinite(sensor.getTemperature())) {
-                final double kelvin = sensor.getTemperature() + 273.15;
+                final float kelvin = (float) (sensor.getTemperature() + 273.15);
 
                 return kelvin;
             }
 
-            return Double.NaN;
+            return Float.NaN;
         }
     };
 
@@ -93,5 +93,5 @@ public enum TUnit {
         return ENUM_MAP.get(name.toLowerCase());
     }
 
-    public abstract double convert(final SensorData sensor);
+    public abstract float convert(final SensorData sensor);
 }

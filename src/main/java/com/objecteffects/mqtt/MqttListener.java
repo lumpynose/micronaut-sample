@@ -1,5 +1,8 @@
 package com.objecteffects.mqtt;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.objecteffects.sensors.ProcessMessage;
 import com.objecteffects.sensors.SensorData;
 import com.objecteffects.sensors.Sensors;
@@ -11,10 +14,10 @@ import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micronaut.context.annotation.Prototype;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
-@Prototype
+@Singleton
 public class MqttListener implements IMqttMessageListener {
     final static Logger log = LoggerFactory.getLogger(MqttListener.class);
 
@@ -26,6 +29,9 @@ public class MqttListener implements IMqttMessageListener {
     @Inject
     Sensors sensors;
 
+    private final Map<String, SensorData> sensorsMap =
+        new ConcurrentHashMap<>();
+
     public MqttListener() {
         log.info("constructor");
     }
@@ -36,12 +42,14 @@ public class MqttListener implements IMqttMessageListener {
         throws Exception {
         final String messageTxt = new String(mqttMessage.getPayload());
         log.info("Message on {}: '{}'", topic, messageTxt);
-        
+
         final SensorData target =
             this.processMessage.processData(topic, messageTxt);
         log.info("target: {}", target);
 
         this.sensors.addSensor(target);
+        
+        this.sensorsMap.put(target.getSensorName(), target);
 
         final MqttProperties props = mqttMessage.getProperties();
         final String responseTopic = props.getResponseTopic();
@@ -62,6 +70,14 @@ public class MqttListener implements IMqttMessageListener {
         }
     }
 
+    public Sensors getSensors() {
+        return this.sensors;
+    }
+    
+    public Map<String, SensorData> getSensorsMap() {
+        return this.sensorsMap;
+    }
+    
     public void setClient(final MqttClient _client) {
         this.client = _client;
     }

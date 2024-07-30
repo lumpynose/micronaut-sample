@@ -9,17 +9,17 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.micronaut.context.annotation.Prototype;
 import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.context.event.StartupEvent;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 /*
  * Use this when using tomcat.
  */
 
-@Singleton
+@Prototype
 public class MqttStartupContainer implements ApplicationEventListener<StartupEvent>  {
     final static Logger log = LoggerFactory.getLogger(MqttStartupContainer.class);
 

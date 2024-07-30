@@ -13,14 +13,11 @@ import org.junit.jupiter.api.Test;
  */
 class MqttTest {
     @Test
+    @SuppressWarnings("static-method")
     void testItWorks() throws MqttException {
-        String serverIp = "192.168.50.5";
-        String port = "1883";
-        String[] topics = { "rtl_433/temperature/+", "zigbee/temperature/+" };
-        int qos = 1;
-        String broker;
-
-        broker = "tcp://" + serverIp + ":" + port;
+        final String broker = "tcp://192.168.50.3:1883";
+        final String[] topics = { "rtl_433/temperature/+", "zigbee/temperature/+" };
+        final int qos = 1;
 
         MqttClient client = new MqttConnect().connect(broker);
         
