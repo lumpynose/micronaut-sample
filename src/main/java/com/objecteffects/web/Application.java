@@ -3,6 +3,7 @@ package com.objecteffects.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.micronaut.context.ApplicationContext;
 import io.micronaut.runtime.Micronaut;
 
 public class Application {
@@ -11,6 +12,8 @@ public class Application {
     public static void main(final String[] args) {
         log.info("Application main");
 
-        Micronaut.run(Application.class, args);
+        try (ApplicationContext ctx = Micronaut.run(Application.class, args)) {
+            log.info("environment: {}", ctx.getEnvironment());
+        }
     }
 }

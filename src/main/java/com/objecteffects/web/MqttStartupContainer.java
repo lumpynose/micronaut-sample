@@ -9,19 +9,21 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micronaut.context.annotation.Prototype;
 import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.context.event.StartupEvent;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /*
  * Use this when using tomcat.
  */
 
-@Prototype
-public class MqttStartupContainer implements ApplicationEventListener<StartupEvent>  {
-    final static Logger log = LoggerFactory.getLogger(MqttStartupContainer.class);
+@Singleton
+public class MqttStartupContainer
+    implements ApplicationEventListener<StartupEvent> {
+    final static Logger log =
+        LoggerFactory.getLogger(MqttStartupContainer.class);
 
     final String broker = "tcp://192.168.50.3:1883";
     final String[] topics = { "rtl_433/temperature/+", "zigbee/temperature/+" };
@@ -37,6 +39,7 @@ public class MqttStartupContainer implements ApplicationEventListener<StartupEve
     MqttListener listener;
 
     @PostConstruct
+    @SuppressWarnings("static-method")
     public void initialize() {
         log.info("initialize");
     }

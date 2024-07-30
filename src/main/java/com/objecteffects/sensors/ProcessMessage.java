@@ -12,8 +12,9 @@ import io.micronaut.jackson.databind.JacksonDatabindMapper;
 import io.micronaut.context.annotation.Prototype;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
-@Prototype
+@Singleton
 public class ProcessMessage {
     private final static Logger log = LoggerFactory
         .getLogger(ProcessMessage.class);
@@ -27,8 +28,10 @@ public class ProcessMessage {
     // private static Map<String, String> propSensors =
     // MainPaho.getPropSensors();
 
-    public ProcessMessage() {
-        log.info("constructor");
+    @PostConstruct
+    @SuppressWarnings("static-method")
+    public void initialize() {
+        log.info("initialize");
     }
 
     public SensorData processData(final String topic, final String data)
@@ -56,10 +59,5 @@ public class ProcessMessage {
         log.info("decoded data: {}", target.toString());
 
         return target;
-    }
-
-    @PostConstruct
-    public void initialize() {
-        log.info("initialize");
     }
 }

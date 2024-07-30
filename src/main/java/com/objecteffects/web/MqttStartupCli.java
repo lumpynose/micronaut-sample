@@ -5,18 +5,16 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micronaut.context.annotation.Prototype;
-import io.micronaut.context.annotation.Requires;
-import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import com.objecteffects.mqtt.MqttConnect;
 import com.objecteffects.mqtt.MqttListen;
 import com.objecteffects.mqtt.MqttListener;
 
-@Prototype
+@Singleton
 public class MqttStartupCli
     /* implements ApplicationEventListener<ServerStartupEvent> */ {
     final static Logger log = LoggerFactory.getLogger(MqttStartupCli.class);
@@ -34,6 +32,12 @@ public class MqttStartupCli
     @Inject
     MqttListener listener;
 
+    @PostConstruct
+    @SuppressWarnings("static-method")
+    public void initialize() {
+        log.info("initialize");
+    }
+
     // @Override
     public void onApplicationEvent(final ServerStartupEvent startupEvent) {
         log.info("MqttStartup ServerStartupEvent");
@@ -48,10 +52,5 @@ public class MqttStartupCli
         catch (MqttException e) {
             log.error("exception: {}", e);
         }
-    }
-
-    @PostConstruct
-    public void initialize() {
-        log.info("initialize");
     }
 }

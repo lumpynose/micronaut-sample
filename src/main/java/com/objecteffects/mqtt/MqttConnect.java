@@ -9,9 +9,9 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micronaut.context.annotation.Prototype;
+import jakarta.inject.Singleton;
 
-@Prototype
+@Singleton
 public class MqttConnect {
     final static Logger log = LoggerFactory.getLogger(MqttConnect.class);
 
